@@ -1,0 +1,204 @@
+CanvasExample5:
+# main interface
+
+#:set s dp(150)
+
+
+<CanvasExample1>:
+    canvas:
+        Rectangle: 
+            pos: self.center_x-s/2, self.center_y-s/2
+            size: s, s
+        Ellipse:
+            pos: 100, 250
+            size: s, s/2
+        Line:
+            points: (0, 0, self.width/4, 100, self.width/2, 0, self.width*3/4, 100, self.width, 0) 
+            width: 2
+
+<CanvasExample2>:
+    canvas:
+        Line:
+            points: (self.width/2, 0, self.width/2, self.height)
+            width: 2
+        Line:
+            points: (0, self.height/2, self.width, self.height/2)
+            width: 2
+
+<CanvasExample3>:
+    canvas:
+        Color:
+            rgba: 1, 0, 0, .25
+        Line:
+            circle: (100, 100, 50) # center_x, center_y, radius
+            width: 2
+        Line:
+            ellipse: (250, 150, 50, 100) # center_x, center_y, radius_x, radius_y
+            width: 4
+        Color:
+            rgba: 0, 0, 1, 1
+        Line:
+            rectangle: (400, 50, 150, 100) # x, y, w, h
+            width: 2
+
+<CanvasExample4>:
+    Button:
+        pos: 50, 200
+        text: "A"
+        size: 60, 60
+        on_press: root.on_button_a_click()
+
+<ImageExample@GridLayout>:
+    cols: 3
+    Image:
+        source: "images/cake.jpg"
+    Image:
+        source: "images/cake.jpg"
+        allow_stretch: True
+    Image:
+        source: "images/cake.jpg"
+        allow_stretch: True
+        keep_ratio: False
+
+<WidgetsExample>:
+    cols: 3
+
+    ToggleButton:
+        text: "OFF"
+        on_state: root.on_togle_button(self)
+        size_hint: None, 1
+        width: "100dp"
+
+    Button:
+        text: "count"
+        on_press: root.on_button_click()
+        disabled: not root.count_state
+
+    Label:
+        text: root.my_text
+        font_name: "fonts/Lcd.ttf"
+        font_size: "80dp"
+        color: 1, .5, 1, 1
+    
+    Switch:
+        id: my_switch
+        active: True
+        size_hint: None, 1
+        width: "100dp"
+        # on_active: root.on_switch_active(self)
+    
+    Slider:
+        id: my_slider
+        min: 0
+        max: 100
+        value: 50
+        disabled: not my_switch.active
+        # on_value: root.on_slider_value(self)
+        orientation: "vertical"
+    
+    BoxLayout:
+        orientation: "vertical"
+        Label: 
+            text: str(int(my_slider.value))
+        ProgressBar:
+            max: 100
+            value: my_slider.value
+    
+    TextInput:
+        id: my_text_input
+        size_hint: None, 1
+        width: "100dp"
+        text: "fool"
+        multiline: False
+        on_text_validate: root.on_text_validate(self)
+    Label:
+        text: "you are: " + root.text_input_str
+
+<PageLayoutExample@PageLayout>:
+    MainWidget:
+    BoxLayoutExample:
+    GridLayoutExample:
+    AnchorLayoutExample:
+
+<ScrollViewExample@ScrollView>:
+    StackLayoutExample:
+        size_hint: 1, None
+        height: self.minimum_height
+
+<StackLayoutExample>:
+    # left-right top-bottom
+    # orientation: "rl-bt"
+    # padding: ("20dp", "20dp", "20dp", "20dp")
+    # spacing: "20dp", "20dp"
+
+<GridLayoutExample>:
+    # cols: 3
+    rows: 2
+    Button:
+        text:"A"
+        size_hint: None, 1
+        width: "60dp"
+    BoxLayoutExample:
+    Button:
+        text:"C"
+    Button:
+        text:"D"
+        size_hint: None, 1
+        width: "60dp"
+    Button:
+        text:"E"
+    Button:
+        text:"F"
+
+<AnchorLayoutExample>:
+    # right, left, center
+    anchor_x: "center"
+    # bottom, top, center
+    anchor_y: "top"
+    BoxLayout:
+        size_hint: .2, .2
+        Button:
+            text:"A"
+        Button:
+            text: "B"
+
+
+<BoxLayoutExample>:
+    orientation: "horizontal"
+    Button:
+        text: "A"
+        size_hint: .5, .5
+        # size: "100dp", "60dp"
+        # widht: "100dp"
+        #height: "60dp"
+        # x, center_x, right
+        #y, center_y, top
+        pos_hint: {"center_y":.5}
+    
+    BoxLayout:
+        orientation:"vertical"
+        spacing: "10dp"
+        Button:
+            text: "B1"
+        Button:
+            text:"B2"
+        Button:
+            text:"B3"
+        Button:
+            text:"B4"   
+    Label:
+        text: "c"
+
+<MainWidget>:
+    Button:
+        text: "Hello"
+        size: "100dp", "80dp"
+        pos: "100dp", "200dp"
+        color: 0,0,1, 1
+    Label:
+        text: "Hello2"
+        size: "100dp", "80dp"
+        pos: "200dp", "300dp"
+        color: 1, 0, 0, 1
+
+
